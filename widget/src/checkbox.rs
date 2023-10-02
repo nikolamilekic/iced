@@ -67,11 +67,8 @@ where
     /// Creates a new [`Checkbox`].
     ///
     /// It expects:
-    ///   * a boolean describing whether the [`Checkbox`] is checked or not
     ///   * the label of the [`Checkbox`]
-    ///   * a function that will be called when the [`Checkbox`] is toggled. It
-    ///     will receive the new state of the [`Checkbox`] and must produce a
-    ///     `Message`.
+    ///   * a boolean describing whether the [`Checkbox`] is checked or not
     pub fn new(label: impl Into<String>, is_checked: bool) -> Self {
         Checkbox {
             is_checked,
@@ -99,7 +96,7 @@ where
     /// It will receive the new state of the [`Checkbox`] and must produce a
     /// `Message`.
     ///
-    /// If `on_toggle` is not called the checkbox will be disabled.
+    /// Unless `on_toggle` is called, the [`Checkbox`] will be disabled.
     pub fn on_toggle<F>(mut self, f: F) -> Self
     where
         F: 'a + Fn(bool) -> Message,
