@@ -108,7 +108,7 @@ iced_runtime = { version = "0.12", path = "runtime" }
 iced_style = { version = "0.12", path = "style" }
 iced_tiny_skia = { version = "0.12", path = "tiny_skia" }
 iced_wgpu = { version = "0.12", path = "wgpu" }
-iced_widget = { version = "0.12", path = "widget" }
+iced_widget = { version = "0.1", path = "widget" }
 iced_winit = { version = "0.12", path = "winit" }
 
 async-std = "1.0"
