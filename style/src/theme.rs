@@ -295,7 +295,7 @@ impl checkbox::StyleSheet for Theme {
             Checkbox::Secondary => checkbox_appearance(
                 palette.background.base.text,
                 palette.background.base,
-                palette.background.base,
+                palette.background.weak,
                 is_checked,
             ),
             Checkbox::Success => checkbox_appearance(
@@ -331,7 +331,7 @@ impl checkbox::StyleSheet for Theme {
             Checkbox::Secondary => checkbox_appearance(
                 palette.background.base.text,
                 palette.background.weak,
-                palette.background.base,
+                palette.background.weak,
                 is_checked,
             ),
             Checkbox::Success => checkbox_appearance(
@@ -347,6 +347,42 @@ impl checkbox::StyleSheet for Theme {
                 is_checked,
             ),
             Checkbox::Custom(custom) => custom.hovered(self, is_checked),
+        }
+    }
+
+    fn disabled(
+        &self,
+        style: &Self::Style,
+        is_checked: bool,
+    ) -> checkbox::Appearance {
+        let palette = self.extended_palette();
+
+        match style {
+            Checkbox::Primary => checkbox_appearance(
+                palette.primary.strong.text,
+                palette.background.weak,
+                palette.background.strong,
+                is_checked,
+            ),
+            Checkbox::Secondary => checkbox_appearance(
+                palette.background.strong.color,
+                palette.background.weak,
+                palette.background.weak,
+                is_checked,
+            ),
+            Checkbox::Success => checkbox_appearance(
+                palette.success.base.text,
+                palette.background.weak,
+                palette.success.weak,
+                is_checked,
+            ),
+            Checkbox::Danger => checkbox_appearance(
+                palette.danger.base.text,
+                palette.background.weak,
+                palette.danger.weak,
+                is_checked,
+            ),
+            Checkbox::Custom(custom) => custom.active(self, is_checked),
         }
     }
 }
@@ -597,6 +633,28 @@ impl pick_list::StyleSheet for Theme {
                 }
             }
             PickList::Custom(custom, _) => custom.hovered(self),
+        }
+    }
+
+    fn disabled(
+        &self,
+        style: &<Self as pick_list::StyleSheet>::Style,
+    ) -> pick_list::Appearance {
+        match style {
+            PickList::Default => {
+                let palette = self.extended_palette();
+
+                pick_list::Appearance {
+                    text_color: palette.background.strong.color,
+                    background: palette.background.weak.color.into(),
+                    placeholder_color: palette.background.strong.color,
+                    handle_color: palette.background.strong.color,
+                    border_radius: 2.0.into(),
+                    border_width: 1.0,
+                    border_color: palette.background.strong.color,
+                }
+            }
+            PickList::Custom(custom, _) => custom.active(self),
         }
     }
 }

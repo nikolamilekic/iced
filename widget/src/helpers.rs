@@ -150,13 +150,12 @@ where
 pub fn checkbox<'a, Message, Renderer>(
     label: impl Into<String>,
     is_checked: bool,
-    f: impl Fn(bool) -> Message + 'a,
 ) -> Checkbox<'a, Message, Renderer>
 where
     Renderer: core::text::Renderer,
     Renderer::Theme: checkbox::StyleSheet + text::StyleSheet,
 {
-    Checkbox::new(label, is_checked, f)
+    Checkbox::new(label, is_checked)
 }
 
 /// Creates a new [`Radio`].
@@ -261,7 +260,6 @@ where
 pub fn pick_list<'a, Message, Renderer, T>(
     options: impl Into<Cow<'a, [T]>>,
     selected: Option<T>,
-    on_selected: impl Fn(T) -> Message + 'a,
 ) -> PickList<'a, T, Message, Renderer>
 where
     T: ToString + Eq + 'static,
@@ -274,7 +272,7 @@ where
     <Renderer::Theme as overlay::menu::StyleSheet>::Style:
         From<<Renderer::Theme as pick_list::StyleSheet>::Style>,
 {
-    PickList::new(options, selected, on_selected)
+    PickList::new(options, selected)
 }
 
 /// Creates a new [`ComboBox`].
